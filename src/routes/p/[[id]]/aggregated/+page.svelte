@@ -26,14 +26,20 @@
 </script>
 
 <table class="w-full ml-1">
-  <tr class="">
-    <td>Name</td>
-    <td>Time spent</td>
-  </tr>
-  {#each aggregates as [name, { duration, count }]}
+  <tbody>
     <tr>
-      <td><span class="font-semibold">{name}</span> x{count}</td>
-      <td>{Math.round(duration / 1000)} μs ({((100 * duration) / total).toFixed(1)}%)</td>
+      <td>Name</td>
+      <td>Time spent</td>
     </tr>
-  {/each}
+
+    {#each aggregates as [name, { duration, count }]}
+      <tr>
+        <td><span class="font-semibold">{name}</span> x{count}</td>
+        <td>
+          {Math.round(duration / 1000)} μs
+          ({((100 * duration) / total).toFixed(1)}%)
+        </td>
+      </tr>
+    {/each}
+  </tbody>
 </table>

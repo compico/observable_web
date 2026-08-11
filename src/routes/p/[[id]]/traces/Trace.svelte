@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type Trace } from '$lib/types';
-  import { Minus, Plus } from 'lucide-svelte';
+  import { Minus, Plus } from '@lucide/svelte';
   export let data: Trace;
   export let total: number | undefined = undefined;
   export let expanded = true;

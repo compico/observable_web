@@ -35,36 +35,41 @@
 
 <table class="border-b w-full">
   {#each chunkMap as { name, chunks, rate, enabled }}
-    <tr class="tbl">
-      <td
-        on:click={(_) => (enabled = !enabled)}
-        style="width: 50%; font-weight: bold; cursor: pointer;"
-        >{enabled ? '-' : '+'} {name} &mdash; {chunks.length} chunks</td
-      >
-      <td>{Math.round(rate / 1000)} μs/t</td>
-      <td>Position</td>
-    </tr>
-    {#if enabled}
-      {#each chunks as entry}
-        {@const { x, z } = entry.chunk}
-        {@const position = {
-          x: x * 16 + 8,
-          y: 128,
-          z: z * 16 + 8
-        }}
-        <tr style="font-size: 1em; border-bottom: 1px solid #404040;">
-          <td style="padding-left: 2em;">({x}, {z})</td>
-          <td>{Math.round(entry.rate / 1000)} μs/t</td>
-          <td style="width: 30%;">
-            <button
-              style="cursor: pointer; color: lightblue; display: inline-block;"
-              on:click={(_) => copyTPCommand(name, position)}
-            >
-              Visit
-            </button>
-          </td>
-        </tr>
-      {/each}
-    {/if}
+    <tbody>
+      <tr class="tbl">
+        <td
+          on:click={(_) => (enabled = !enabled)}
+          style="width: 50%; font-weight: bold; cursor: pointer;"
+        >
+          {enabled ? '-' : '+'} {name} &mdash; {chunks.length} chunks
+        </td>
+        <td>{Math.round(rate / 1000)} μs/t</td>
+        <td>Position</td>
+      </tr>
+
+      {#if enabled}
+        {#each chunks as entry}
+          {@const { x, z } = entry.chunk}
+          {@const position = {
+            x: x * 16 + 8,
+            y: 128,
+            z: z * 16 + 8
+          }}
+
+          <tr style="font-size: 1em; border-bottom: 1px solid #404040;">
+            <td style="padding-left: 2em;">({x}, {z})</td>
+            <td>{Math.round(entry.rate / 1000)} μs/t</td>
+            <td style="width: 30%;">
+              <button
+                style="cursor: pointer; color: lightblue; display: inline-block;"
+                on:click={(_) => copyTPCommand(name, position)}
+              >
+                Visit
+              </button>
+            </td>
+          </tr>
+        {/each}
+      {/if}
+    </tbody>
   {/each}
 </table>

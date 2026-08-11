@@ -1,10 +1,10 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import type { LayoutData } from './$types';
-  import Clock from 'lucide-svelte/icons/clock';
-  import Download from 'lucide-svelte/icons/download';
-  import Hourglass from 'lucide-svelte/icons/hourglass';
-  import User from 'lucide-svelte/icons/user';
+  import Clock from '@lucide/svelte/icons/clock';
+  import Download from '@lucide/svelte/icons/download';
+  import Hourglass from '@lucide/svelte/icons/hourglass';
+  import User from '@lucide/svelte/icons/user';
 
   export let data: LayoutData;
 

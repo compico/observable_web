@@ -18,14 +18,21 @@
 </script>
 
 <table class="overflow-auto">
-  {#each extraData as i}
-    <tr on:click={(_) => (i.open = !i.open)} class="header">{i.label()}</tr>
-    {#if i.open}
-      <tr>
-        <code>{i.val}</code>
+  <tbody>
+    {#each extraData as i}
+      <tr on:click={() => (i.open = !i.open)} class="header">
+        <td>{i.label()}</td>
       </tr>
-    {/if}
-  {/each}
+
+      {#if i.open}
+        <tr>
+          <td>
+            <code>{i.val}</code>
+          </td>
+        </tr>
+      {/if}
+    {/each}
+  </tbody>
 </table>
 
 <style scoped>

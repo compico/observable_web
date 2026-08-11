@@ -1,0 +1,13 @@
+node_modules
+    .svelte - kit
+build
+    .git
+    .gitignore
+    .env
+    .env.*
+    !.env.example
+        .vscode
+        .idea
+        .DS_Store
+npm - debug.log *
+*.db
