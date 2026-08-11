@@ -1,10 +1,22 @@
 import Sqids from 'sqids';
-import { createClient } from '@libsql/client';
+import { createClient, type Client } from '@libsql/client';
 import { env } from '$env/dynamic/private';
 
-export const db = createClient({
-  url: env.DB_URL ?? 'file:/data/observable.db',
-  ...(env.DB_KEY ? { authToken: env.DB_KEY } : {})
-});
+let db: Client | undefined;
+
+export function getDb(): Client {
+  if (!db) {
+    if (!env.DB_URL) {
+      throw new Error('DB_URL is not configured');
+    }
+
+    db = createClient({
+      url: env.DB_URL,
+      ...(env.DB_KEY ? { authToken: env.DB_KEY } : {})
+    });
+  }
+
+  return db;
+}
 
 export const sqids = new Sqids();

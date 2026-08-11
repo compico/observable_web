@@ -1,4 +1,4 @@
-import { sqids, db } from '$lib';
+import { sqids, getDb } from '$lib';
 import { text } from '@sveltejs/kit';
 
 const MAX_BODY_SIZE = 20 * 1024 * 1024;
@@ -16,6 +16,7 @@ export async function POST({ request }) {
     return new Response('Request body too large', { status: 413 });
   }
 
+  const db = getDb();
   const {
     rows: [row]
   } = await db.execute({

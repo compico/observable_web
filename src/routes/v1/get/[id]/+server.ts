@@ -1,8 +1,9 @@
-import { sqids, db } from '$lib';
+import { sqids, getDb } from '$lib';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ params }) {
   const [id] = sqids.decode(params.id);
+  const db = getDb();
   const { rows } = await db.execute({
     sql: 'SELECT contents FROM profiles WHERE id = ?',
     args: [id]
