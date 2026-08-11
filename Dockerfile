@@ -23,6 +23,9 @@ COPY --from=build --chown=node:node /app/package.json ./package.json
 COPY --from=build --chown=node:node /app/package-lock.json ./package-lock.json
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/scripts ./scripts
+COPY --chown=node:node docker-entrypoint.sh ./docker-entrypoint.sh
+
+RUN chmod +x docker-entrypoint.sh
 
 RUN mkdir -p /data && chown node:node /data
 
@@ -30,4 +33,4 @@ USER node
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run db:init && node build"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

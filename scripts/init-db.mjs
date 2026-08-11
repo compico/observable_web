@@ -11,13 +11,15 @@ const client = createClient({
     ...(process.env.DB_KEY ? { authToken: process.env.DB_KEY } : {})
 });
 
-await client.execute(`
-  CREATE TABLE IF NOT EXISTS profiles (
+try {
+    await client.execute(`
+    CREATE TABLE IF NOT EXISTS profiles(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     contents BLOB NOT NULL
-  )
-`);
+)
+    `);
 
-console.log('Database initialized');
-
-client.close();
+    console.log('Database initialized');
+} finally {
+    client.close();
+}
